@@ -83,20 +83,20 @@ remove_and_plot <- function(file_name, sample_name) {
   Q3 <- quantile(sample, 0.75)
   IQR <- Q3 - Q1
   
-  lower_bound <- Q1 - 1.5 * IQR
-  upper_bound <- Q3 + 1.5 * IQR
+  low <- Q1 - 1.5 * IQR
+  up<- Q3 + 1.5 * IQR
   
-  trimmed_sample <- sample[sample >= lower_bound & sample <= upper_bound]
+  trim <- sample[sample >= low & sample <= up]
   
   breaks <- seq(0, 10, by = 1)
   
   hist(sample, breaks = breaks, main = paste("Frequency Distribution of", sample_name),
-       xlab = sample_name, ylab = "Frequency", col = "lightblue", border = "black")
+       xlab = sample_name, ylab = "Freq", col = "lightblue", border = "black")
   
   hist(trimmed_sample, breaks = breaks, main = paste("Frequency Distribution of Trimmed", sample_name),
-       xlab = sample_name, ylab = "Frequency", col = "lightgreen", border = "black")
+       xlab = sample_name, ylab = "Freq", col = "lightgreen", border = "black")
   
-  legend("topright", legend = c("Original", "Trimmed"), fill = c("lightblue", "lightgreen"))
+  legend("topright", legend = c("Normal", "Trimmed"), fill = c("lightblue", "lightgreen"))
   
   return(trimmed_sample)
 }
